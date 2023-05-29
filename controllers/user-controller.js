@@ -55,8 +55,9 @@ const userController = {
       Comment.findAll({ include: [Restaurant], raw: true, nest: true, where: { userId } })
     ])
       .then(([user, comments]) => {
+        console.log(user)
         if (!user) throw new Error("User didn't exists!")
-        res.render('users/profile', { user, comments })
+        res.render('users/profile', { user: user.toJSON(), comments })
       })
   },
   editUser: (req, res, next) => {
