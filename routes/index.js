@@ -1,2 +1,4 @@
 const pages = require('./pages')
-module.exports = { pages }
+const apis = require('./apis')
+
+module.exports = { pages, apis }
