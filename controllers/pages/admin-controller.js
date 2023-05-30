@@ -1,15 +1,10 @@
 const { Restaurant, User, Category } = require('../../models')
 const { imgurFileHandler } = require('../../helpers/file-helpers') // 將 file-helper 載進來
+const adminServices = require('../../services/admin-services')
 
 const adminController = {
   getRestaurants: (req, res, next) => {
-    Restaurant.findAll({
-      raw: true, // 把 Sequelize 包裝過的一大包物件轉換成格式比較單純的 JS 原生物件
-      nest: true, // 將原先sequelize因為include生成的物件轉換為可以直接被前端讀取的內容(或用toJSON())
-      include: [Category]
-    })
-      .then(restaurants => res.render('admin/restaurants', { restaurants }))
-      .catch(err => next(err))
+    adminServices.getRestaurants(req, (err, data) => err ? next(err) : res.render('admin/restaurants', data))
   },
   createRestaurant: (req, res, next) => {
     Category.findAll({
