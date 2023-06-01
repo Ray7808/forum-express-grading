@@ -1,10 +1,9 @@
-const express = require('express')
-const { pages, apis } = require('./routes')
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
+const express = require('express')
+const { pages, apis } = require('./routes')
 const path = require('path') // 引入 path 套件
 const handlebars = require('express-handlebars')
 const flash = require('connect-flash')
